@@ -9,9 +9,10 @@ public class Mover : MonoBehaviour
     
     void Update()
     {
-        if (Input.GetMouseButtonDown(0)) {
+        if (Input.GetMouseButton(0)) {
             MoveToCursor();
         }
+        UpdateAnimator();
     }
 
     private void MoveToCursor() {
@@ -22,5 +23,15 @@ public class Mover : MonoBehaviour
         if (hasHit) {
             GetComponent<NavMeshAgent>().destination = hit.point;
         }
+    }
+
+    private void UpdateAnimator() {
+        // get global velocity of nav mesh agent
+        Vector3 velocity = GetComponent<NavMeshAgent>().velocity;
+        // make local so it is meaningful for character
+        Vector3 localVelocity = transform.InverseTransformDirection(velocity);
+        float speed = localVelocity.z;
+
+        GetComponent<Animator>().SetFloat("forwardSpeed", speed);
     }
 }
