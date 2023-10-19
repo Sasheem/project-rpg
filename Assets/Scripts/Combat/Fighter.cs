@@ -6,9 +6,13 @@ namespace RPG.Combat
 {
     public class Fighter : MonoBehaviour, IAction {
         [SerializeField] float weaponRange = 2f;
+        [SerializeField] float timeBetweenAttacks = 1f;
         Transform target;
-        private void Update()
-        {
+        float timeSinceLastAttack = 0;
+        private void Update() {
+            // Time.deltaTime = the time the last frame took to render
+            timeSinceLastAttack += Time.deltaTime;
+
             if (target == null) return;
             
             // get within range
@@ -26,9 +30,14 @@ namespace RPG.Combat
 
         private void AttackBehavior()
         {
-            GetComponent<Animator>().SetTrigger("attack");
+            // throttle the attack speed
+            if (timeSinceLastAttack > timeBetweenAttacks) {
+                GetComponent<Animator>().SetTrigger("attack");
+                timeSinceLastAttack = 0;
+            }
+            
         }
-        
+
         private bool GetIsInRange()
         {
             return Vector3.Distance(transform.position, target.position) < weaponRange;
