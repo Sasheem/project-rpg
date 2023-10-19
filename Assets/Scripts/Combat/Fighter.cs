@@ -11,17 +11,24 @@ namespace RPG.Combat
         {
             if (target == null) return;
             
-            if (!GetIsInRange())
-            {
+            // get within range
+            if (!GetIsInRange()) {
                 GetComponent<Mover>().MoveTo(target.position);
             }
             else
             {
-            // stop the NavMeshAgent 2m from the center
+                // stop the NavMeshAgent 2m from the center
+                // then attack
                 GetComponent<Mover>().Cancel();
+                AttackBehavior();
             }
         }
 
+        private void AttackBehavior()
+        {
+            GetComponent<Animator>().SetTrigger("attack");
+        }
+        
         private bool GetIsInRange()
         {
             return Vector3.Distance(transform.position, target.position) < weaponRange;
@@ -36,5 +43,8 @@ namespace RPG.Combat
         public void Cancel() {
             target = null;
         }
+
+        // Called during AnimationEvent - Hit
+        void Hit() {}
     }
 }
