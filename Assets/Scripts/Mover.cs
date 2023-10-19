@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using RPG.Core;
 using UnityEngine;
 using UnityEngine.AI;
 
+
 namespace RPG.Movement
 {
-    public class Mover : MonoBehaviour
+    public class Mover : MonoBehaviour, IAction
     {
         [SerializeField] Transform target;
         NavMeshAgent navMeshAgent;
@@ -19,16 +21,23 @@ namespace RPG.Movement
             UpdateAnimator();
         }
 
+        public void StartMoveAction(Vector3 destination) {
+            GetComponent<ActionScheduler>().StartAction(this);
+            MoveTo(destination);
+        }
+
         public void MoveTo(Vector3 destination)
         {
             navMeshAgent.destination = destination;
             navMeshAgent.isStopped = false;
         }
 
-        // stop the NavMeshAgent 2m from the center
-        public void Stop() {
+        // To obey interface contract
+        // Stop moving?
+        public void Cancel() {
             navMeshAgent.isStopped = true;
         }
+
 
         private void UpdateAnimator() {
             // get global velocity of nav mesh agent
