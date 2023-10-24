@@ -34,6 +34,7 @@ namespace RPG.Combat
 
         private void AttackBehavior()
         {
+            transform.LookAt(target.transform);
             // throttle the attack speed
             if (timeSinceLastAttack > timeBetweenAttacks) {
                 // triggers the Hit() event.
