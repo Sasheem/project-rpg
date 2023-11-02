@@ -21,7 +21,9 @@ namespace RPG.Control {
 
                 // safeguard against using targets that are of CombatTarget type
                 CombatTarget target = hit.transform.GetComponent<CombatTarget>();
-                if (target == null) continue;
+                
+                // can't attack then continue, don't try anything with it
+                if (!GetComponent<Fighter>().CanAttack(target)) continue;
 
                 if (Input.GetMouseButtonDown(0)) {
                     GetComponent<Fighter>().Attack(target);
