@@ -36,17 +36,25 @@ namespace RPG.Combat
         {
             transform.LookAt(target.transform);
             // throttle the attack speed
-            if (timeSinceLastAttack > timeBetweenAttacks) {
+            if (timeSinceLastAttack > timeBetweenAttacks)
+            {
                 // triggers the Hit() event.
-                GetComponent<Animator>().SetTrigger("attack");
+                TriggerAttack();
                 timeSinceLastAttack = 0;
             }
-            
+
+        }
+
+        private void TriggerAttack()
+        {
+            GetComponent<Animator>().ResetTrigger("stopAttack");
+            GetComponent<Animator>().SetTrigger("attack");
         }
 
         // Animation Event - Hit
         void Hit() {
-            // need to add null check
+            // null check
+            if (target == null) { return; }
             target.TakeDamage(weaponDamage);
         }
 
@@ -67,9 +75,16 @@ namespace RPG.Combat
         }
 
         // Stop attacking
-        public void Cancel() {
-            GetComponent<Animator>().SetTrigger("stopAttack");
+        public void Cancel()
+        {
+            TriggerStopAttack();
             target = null;
+        }
+
+        private void TriggerStopAttack()
+        {
+            GetComponent<Animator>().ResetTrigger("attack");
+            GetComponent<Animator>().SetTrigger("stopAttack");
         }
     }
 }
