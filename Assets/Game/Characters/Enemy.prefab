@@ -66,7 +66,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 336063364, guid: d7642e0636a2de8449d5a34a27f2680f, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 336063365, guid: d7642e0636a2de8449d5a34a27f2680f, type: 3}
+      propertyPath: m_Speed
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1143426500078843441, guid: d7642e0636a2de8449d5a34a27f2680f, type: 3}
       propertyPath: m_RootOrder
@@ -174,3 +178,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f98e12c843603614a9407a571d5374e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4181256693875322246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6267494814740740027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72f95d723e21c314bbadecb86e90f2f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chaseDistance: 5
