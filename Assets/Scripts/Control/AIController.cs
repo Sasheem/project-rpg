@@ -6,7 +6,6 @@ using UnityEngine;
 namespace RPG.Control {
     public class AIController : MonoBehaviour {
         [SerializeField] float chaseDistance = 5f;
-
         Fighter fighter;
         GameObject player;
         private void Start() {
@@ -14,8 +13,8 @@ namespace RPG.Control {
             player = GameObject.FindWithTag("Player");
         }
 
+        // Attack player if within range, stop attacking if not
         private void Update() {
-            // calculate the distance to the player
             if (InAttackRangeOfPlayer() && fighter.CanAttack(player)) {
                 fighter.Attack(player);
             } else {
@@ -23,6 +22,7 @@ namespace RPG.Control {
             }
         }
 
+        // calculate the distance to the player
         private bool InAttackRangeOfPlayer() {
             float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
             return distanceToPlayer < chaseDistance;
