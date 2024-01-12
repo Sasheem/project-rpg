@@ -5,18 +5,13 @@ namespace RPG.SceneManagement {
     public class Fader : MonoBehaviour {
         CanvasGroup canvasGroup;
 
-        private void Start() {
+        private void Awake() {
             canvasGroup = GetComponent<CanvasGroup>();
-
-            // StartCoroutine(FadeOutIn());
         }
 
-        // public IEnumerator FadeOutIn() {
-        //     yield return FadeOut(3f);
-        //     print("Faded out");
-        //     yield return FadeIn(1f);
-        //     print("Faded in");
-        // }
+        public void FadeOutImmediate() {
+            canvasGroup.alpha = 1;
+        }
         
         // go from alpha 0 to 1
         public IEnumerator FadeOut(float time) {

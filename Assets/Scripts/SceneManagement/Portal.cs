@@ -31,28 +31,51 @@ namespace RPG.SceneManagement {
                 yield break;
             }
 
+            // Dont get rid of portal until new world has loaded up
             DontDestroyOnLoad(gameObject);
-
-            Fader fader = FindObjectOfType<Fader>();
-
-            yield return fader.FadeOut(fadeOutTime);
-            yield return SceneManager.LoadSceneAsync(sceneToLoad);;
             
+            Fader fader = FindObjectOfType<Fader>();
+            SavingWrapper savingWrapper = FindObjectOfType<SavingWrapper>();
+
+            // begin fading out over time
+            yield return fader.FadeOut(fadeOutTime);
+
+            // save current level
+            savingWrapper.Save();
+            yield return SceneManager.LoadSceneAsync(sceneToLoad);
+
+            // load current level
+            savingWrapper.Load();
+            
+            // finding corresponding portal
             Portal otherPortal = GetOtherPortal();
             UpdatePlayer(otherPortal);
 
+            // waiting for some time so camera can stabilize
             yield return new WaitForSeconds(fadeWaitTime);
             yield return fader.FadeIn(fadeInTime);
 
+            UpdatePlayer(otherPortal);
+
+            // destroy this portal
             Destroy(gameObject);
         }
 
+        /*
+            Possible error located here.
+            Does this run again after a player exits a portal into a new scene?
+        */
         private void UpdatePlayer(Portal otherPortal)
         {
             GameObject player = GameObject.FindWithTag("Player");
+            // player.GetComponent<NavMeshAgent>().enabled = false;
             player.GetComponent<NavMeshAgent>().Warp(otherPortal.spawnPoint.position);
+            // player.transform.position = otherPortal.spawnPoint.position;
             player.transform.rotation = otherPortal.spawnPoint.rotation;
-            // Possible rotation solution
+            // player.GetComponent<NavMeshAgent>().enabled = true;
+            
+
+            // Possible rotation solution - does not work anymore
             // Vector3 directionVector = (otherPortal.spawnPoint.position - otherPortal.transform.position).normalized;
             // player.transform.rotation = Quaternion.LookRotation(directionVector);
         }
