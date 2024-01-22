@@ -75,5 +75,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: ArrowProjectileBlue
       objectReference: {fileID: 0}
+    - target: {fileID: 7295303422976242485, guid: ba92b5c30ebd92c46a4b73b1d2a328ef, type: 3}
+      propertyPath: speed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7295303422976242485, guid: ba92b5c30ebd92c46a4b73b1d2a328ef, type: 3}
+      propertyPath: isHoming
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba92b5c30ebd92c46a4b73b1d2a328ef, type: 3}
