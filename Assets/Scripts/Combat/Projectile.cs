@@ -37,8 +37,8 @@ public class Projectile : MonoBehaviour
         return target.transform.position + Vector3.up * targetCapsule.height / 2;
     }
 
+    // Projectile deals damage and destory itself if collided with target
     void OnTriggerEnter(Collider other) {
-        // check that we collided with our target
         if (other.GetComponent<Health>() != target) return;
         target.TakeDamage(damage);
         Destroy(gameObject);
