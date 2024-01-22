@@ -1,7 +1,7 @@
-using UnityEngine;
 using RPG.Movement;
 using RPG.Core;
 using System;
+using UnityEngine;
 
 namespace RPG.Combat
 {
@@ -9,7 +9,8 @@ namespace RPG.Combat
         
         [SerializeField] float timeBetweenAttacks = 1f;
         
-        [SerializeField] Transform handTransform = null;
+        [SerializeField] Transform rightHandTransform = null;
+        [SerializeField] Transform leftHandTransform = null;
         [SerializeField] Weapon defaultWeapon = null;
         
 
@@ -45,7 +46,7 @@ namespace RPG.Combat
         {
             currentWeapon = weapon;
             Animator animator = GetComponent<Animator>();
-            weapon.Spawn(handTransform, animator);
+            weapon.Spawn(rightHandTransform, leftHandTransform, animator);
         }
 
         private void AttackBehavior()
@@ -71,7 +72,19 @@ namespace RPG.Combat
         void Hit() {
             // null check
             if (target == null) { return; }
-            target.TakeDamage(currentWeapon.GetDamage());
+
+            if (currentWeapon.HasProjectile()) {
+                currentWeapon.LaunchProjectile(rightHandTransform, leftHandTransform, target);
+            } else {
+                target.TakeDamage(currentWeapon.GetDamage());
+            }   
+        }
+
+        // Animation Event - Shoot
+        void Shoot() {
+            // needs to be called Shoot to match animation event
+            // has same functionality as Hit() though 
+            Hit();
         }
 
         private bool GetIsInRange()

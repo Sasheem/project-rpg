@@ -66,6 +66,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 461188, guid: 679ff741e12a7e740819ede24a7000b7, type: 3}
   m_PrefabInstance: {fileID: 2805293479514454864}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &2805293479514313404 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 403948, guid: 679ff741e12a7e740819ede24a7000b7, type: 3}
+  m_PrefabInstance: {fileID: 2805293479514454864}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6734240559048815675
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -141,6 +146,14 @@ PrefabInstance:
       propertyPath: weaponOverride
       value: 
       objectReference: {fileID: 22100000, guid: 9d3c510c90f64914f8f2ff74c2fc66a2, type: 2}
+    - target: {fileID: 3696792451563063611, guid: d7642e0636a2de8449d5a34a27f2680f, type: 3}
+      propertyPath: leftHandTransform
+      value: 
+      objectReference: {fileID: 2805293479514313404}
+    - target: {fileID: 3696792451563063611, guid: d7642e0636a2de8449d5a34a27f2680f, type: 3}
+      propertyPath: rightHandTransform
+      value: 
+      objectReference: {fileID: 2805293479514256084}
     - target: {fileID: 8212160064377723453, guid: d7642e0636a2de8449d5a34a27f2680f, type: 3}
       propertyPath: m_Name
       value: Player
