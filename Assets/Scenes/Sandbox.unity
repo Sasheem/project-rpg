@@ -2327,7 +2327,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1268853963}
-  m_LocalRotation: {x: 0.21973565, y: 0.49223813, z: -0.12997453, w: 0.8321806}
+  m_LocalRotation: {x: 0.21973565, y: 0.49223813, z: -0.12997454, w: 0.8321806}
   m_LocalPosition: {x: -8.93, y: 4.17, z: -14.61}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3990,6 +3990,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1893616567143419123, guid: d3a4b519b1cb0fe40abfedcdd021bb90, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 14.615766
+      objectReference: {fileID: 0}
+    - target: {fileID: 1893616567143419123, guid: d3a4b519b1cb0fe40abfedcdd021bb90, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -4.4197464
+      objectReference: {fileID: 0}
+    - target: {fileID: 1893616567214679903, guid: d3a4b519b1cb0fe40abfedcdd021bb90, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 14.615766
+      objectReference: {fileID: 0}
+    - target: {fileID: 1893616567214679903, guid: d3a4b519b1cb0fe40abfedcdd021bb90, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -4.4197464
+      objectReference: {fileID: 0}
     - target: {fileID: 1893616567999227350, guid: d3a4b519b1cb0fe40abfedcdd021bb90, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -4038,6 +4054,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Core
       objectReference: {fileID: 0}
+    - target: {fileID: 1893616568385912509, guid: d3a4b519b1cb0fe40abfedcdd021bb90, type: 3}
+      propertyPath: m_CameraDistance
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8394158860124181844, guid: d3a4b519b1cb0fe40abfedcdd021bb90, type: 3}
+      propertyPath: defaultWeapon
+      value: 
+      objectReference: {fileID: 11400000, guid: e8b2f9e7b058ff84b9d45441d4a29242, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3a4b519b1cb0fe40abfedcdd021bb90, type: 3}
 --- !u!1001 &5698563359057268896

@@ -42,7 +42,7 @@ namespace RPG.Combat {
             // remember params for Instantiate are
             // 1 - what, 2 - where, and 3 - rotation
             Projectile projectileInstance = Instantiate(projectile, GetTransform(rightHand, leftHand).position, Quaternion.identity);
-            projectileInstance.SetTarget(target);
+            projectileInstance.SetTarget(target, weaponDamage);
         }
 
         public float GetDamage() {
