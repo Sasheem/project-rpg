@@ -1165,7 +1165,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 580147245}
-  m_LocalRotation: {x: 0.04883098, y: 0.9380894, z: -0.30930704, w: 0.1480982}
+  m_LocalRotation: {x: 0.048830967, y: 0.9380894, z: -0.30930704, w: 0.14809819}
   m_LocalPosition: {x: -23.78, y: 8.75, z: 0.85}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1876,7 +1876,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 945053180}
-  m_LocalRotation: {x: 0.43947917, y: -0.3213506, z: 0.17202339, w: 0.82097495}
+  m_LocalRotation: {x: -0.05999158, y: 0.9296365, z: -0.31866574, w: -0.17501211}
   m_LocalPosition: {x: 31.05033, y: 6.493413, z: -15.169258}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2463,7 +2463,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1268853963}
-  m_LocalRotation: {x: 0.21973565, y: 0.49223813, z: -0.12997453, w: 0.8321806}
+  m_LocalRotation: {x: 0.21973565, y: 0.49223813, z: -0.12997454, w: 0.8321806}
   m_LocalPosition: {x: -8.93, y: 4.17, z: -14.61}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2680,7 +2680,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1320699590}
-  m_LocalRotation: {x: 0.19176978, y: 0.73304886, z: -0.23021734, w: 0.6106257}
+  m_LocalRotation: {x: 0.19176981, y: 0.7330489, z: -0.23021737, w: 0.6106257}
   m_LocalPosition: {x: 21.830368, y: 4.71, z: -9.128885}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3900,7 +3900,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Path: {fileID: 858996980}
-  m_PathPosition: 1
+  m_PathPosition: 0
   m_PositionUnits: 2
   m_PathOffset: {x: 0, y: 0, z: 0}
   m_XDamping: 0
@@ -4460,6 +4460,10 @@ PrefabInstance:
       propertyPath: defaultWeapon
       value: 
       objectReference: {fileID: 11400000, guid: 17459f6acf0cc73478acf0b8d21a77d9, type: 2}
+    - target: {fileID: 8394158860124181844, guid: d3a4b519b1cb0fe40abfedcdd021bb90, type: 3}
+      propertyPath: defaultWeaponName
+      value: Unarmed
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3a4b519b1cb0fe40abfedcdd021bb90, type: 3}
 --- !u!1001 &5698563359057268896
