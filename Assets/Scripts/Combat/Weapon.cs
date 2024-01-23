@@ -25,10 +25,18 @@ namespace RPG.Combat {
                 GameObject weapon = Instantiate(equippedPrefab, handTransform);
                 weapon.name = weaponName;
             }
+
+            // REWATCH lecture for this
+            // overrideController will be null if this is just the root character AnimatorController
+            // otherwise it will have the value of the AnimatorOverrideController that is in the animator.runtimeAnimatorController
+            var overrideController = animator.runtimeAnimatorController as AnimatorOverrideController;
             if (animatorOverride != null) {
                 animator.runtimeAnimatorController = animatorOverride;
-            }
             
+            } else if (overrideController != null) {
+                // If it is already an override then find its parent and put that as the runtimeANimatorController instead
+                animator.runtimeAnimatorController = overrideController.runtimeAnimatorController;                
+            }
         }
 
         private void DestroyOldWeapon(Transform rightHand, Transform leftHand)
