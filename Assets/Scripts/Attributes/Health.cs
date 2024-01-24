@@ -1,13 +1,17 @@
 using Newtonsoft.Json.Linq;
+using RPG.Core;
 using RPG.Saving;
+using RPG.Stats;
 using UnityEngine;
 
-namespace RPG.Core {
+namespace RPG.Attributes {
     public class Health : MonoBehaviour, IJsonSaveable {
         [SerializeField] float healthPoints = 100f;
         bool isDead = false;
 
         public void Start() {
+            // doing this here causes an issue here, will fix later
+            healthPoints = GetComponent<BaseStats>().GetHealth();
             if (healthPoints == 0) {
                 Die();
             }

@@ -67,5 +67,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Archer
       objectReference: {fileID: 0}
+    - target: {fileID: 6561553700504475741, guid: 129c29ed9dfad1f45a9c18a80672f29a, type: 3}
+      propertyPath: characterClass
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 129c29ed9dfad1f45a9c18a80672f29a, type: 3}

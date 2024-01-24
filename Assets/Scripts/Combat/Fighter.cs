@@ -1,9 +1,9 @@
 using RPG.Movement;
 using RPG.Core;
 using RPG.Saving;
-using System;
 using UnityEngine;
 using Newtonsoft.Json.Linq;
+using RPG.Attributes;
 
 namespace RPG.Combat
 {
@@ -132,7 +132,7 @@ namespace RPG.Combat
         public void RestoreFromJToken(JToken state)
         {
             string weaponName = state.ToObject<string>();
-            Weapon weapon = Resources.Load<Weapon>(weaponName);
+            Weapon weapon = UnityEngine.Resources.Load<Weapon>(weaponName);
             EquipWeapon(weapon);
         }
     }
