@@ -37,6 +37,7 @@ namespace RPG.Attributes {
 
             isDead = true;
             GetComponent<Animator>().SetTrigger("die");
+            GetComponent<CapsuleCollider>().enabled = false;
             // anything that was running now knows it should stop running
             GetComponent<ActionScheduler>().CancelCurrentAction();
         }
