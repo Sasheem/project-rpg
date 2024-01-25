@@ -8,13 +8,8 @@ namespace RPG.Stats {
         [SerializeField] CharacterClass characterClass;
         [SerializeField] Progression progression = null;
 
-        public float GetHealth() {
-            return progression.GetHealth(characterClass, startingLlevel);
-        }
-
-        // temporarily give 10 xp points by default
-        public float GetExperienceReward() {
-            return 10;
+        public float GetStat(Stat stat) {
+            return progression.GetStat(stat, characterClass, startingLlevel);
         }
     }
 }
