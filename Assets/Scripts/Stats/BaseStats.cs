@@ -11,5 +11,10 @@ namespace RPG.Stats {
         public float GetHealth() {
             return progression.GetHealth(characterClass, startingLlevel);
         }
+
+        // temporarily give 10 xp points by default
+        public float GetExperienceReward() {
+            return 10;
+        }
     }
 }

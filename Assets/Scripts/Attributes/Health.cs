@@ -1,3 +1,4 @@
+using System;
 using Newtonsoft.Json.Linq;
 using RPG.Core;
 using RPG.Saving;
@@ -19,11 +20,12 @@ namespace RPG.Attributes {
 
         public bool IsDead() { return isDead; }
 
-        public void TakeDamage(float damage) {
+        public void TakeDamage(GameObject instigator, float damage) {
             healthPoints = Mathf.Max(healthPoints - damage, 0);
             if(healthPoints == 0)
             {
                 Die();
+                AwardExperience(instigator);
             }
         }
 
@@ -40,6 +42,13 @@ namespace RPG.Attributes {
             GetComponent<CapsuleCollider>().enabled = false;
             // anything that was running now knows it should stop running
             GetComponent<ActionScheduler>().CancelCurrentAction();
+        }
+
+        private void AwardExperience(GameObject instigator)
+        {
+            Experience experience = instigator.GetComponent<Experience>();
+            if (experience == null) return; 
+            experience.GainExperience(GetComponent<BaseStats>().GetExperienceReward());
         }
 
         public JToken CaptureAsJToken()

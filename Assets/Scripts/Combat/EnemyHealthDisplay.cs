@@ -14,10 +14,10 @@ namespace RPG.Combat {
         private void Update() {
             if (fighter.GetTarget() == null) {
                 GetComponent<Text>().text = "N/A";
-            } else {
-                Health health = fighter.GetTarget();
-                GetComponent<Text>().text = string.Format("Health: {0:0}%", health.GetPercentage());
+                return;
             }
+            Health health = fighter.GetTarget();
+            GetComponent<Text>().text = string.Format("Health: {0:0}%", health.GetPercentage());
         }
     }
 }
