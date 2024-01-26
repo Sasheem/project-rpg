@@ -1,3 +1,4 @@
+using System;
 using Newtonsoft.Json.Linq;
 using RPG.Saving;
 using UnityEngine;
@@ -8,6 +9,11 @@ namespace RPG.Attributes {
 
         public void GainExperience(float experience) {
             experiencePoints += experience;
+        }
+
+        public float GetPoints()
+        {
+            return experiencePoints;
         }
 
         public JToken CaptureAsJToken()
