@@ -7,15 +7,15 @@ using UnityEngine;
 
 namespace RPG.Attributes {
     public class Health : MonoBehaviour, IJsonSaveable {
-        [SerializeField] float healthPoints = 100f;
+        float healthPoints = -1f;
         bool isDead = false;
 
         public void Start() {
             // doing this here causes an issue here, will fix later
-            healthPoints = GetComponent<BaseStats>().GetStat(Stat.Health);
-            if (healthPoints == 0) {
-                Die();
+            if (healthPoints < 0) {
+                healthPoints = GetComponent<BaseStats>().GetStat(Stat.Health);
             }
+            
         }
 
         public bool IsDead() { return isDead; }
@@ -59,6 +59,9 @@ namespace RPG.Attributes {
         public void RestoreFromJToken(JToken state)
         {
             healthPoints = state.ToObject<float>();
+            if (healthPoints <= 0) {
+                Die();
+            }
             // UpdateState();
         }
 
