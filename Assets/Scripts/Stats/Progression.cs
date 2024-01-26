@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace RPG.Stats {
@@ -5,22 +7,36 @@ namespace RPG.Stats {
     public class Progression : ScriptableObject {
         [SerializeField] ProgressionCharacterClass[] characterClasses = null;
 
+        Dictionary<CharacterClass, Dictionary<Stat, float[]>> lookupTable = null;
+
         public float GetStat(Stat stat, CharacterClass characterClass, int level) {
-            foreach (ProgressionCharacterClass progressionClass in characterClasses) {
-                // ignore all classes that don't equal the one passed in as param
-                if (progressionClass.characterClass != characterClass) continue;
-                
-                foreach (ProgressionStat progressionStat in progressionClass.stats){
-                    // ignore all stats that don't equal the one passed in as param
-                    if (progressionStat.stat != stat)  continue;
+            BuildLookup();
+            float[] levels = lookupTable[characterClass][stat];
+            // guard against looking for a level that is not in this array
+            if (levels.Length < level) return 0;
+            return levels[level - 1];
+        }
 
-                    // guard against looking for a level that is not in this array
-                    if (progressionStat.levels.Length < level) continue;
+        // build the progression table as a Dictionary
+        private void BuildLookup()
+        {
+            // don't run if a lookup table exists
+            if (lookupTable != null) return;
+            // begin building lookup table
+            lookupTable = new Dictionary<CharacterClass, Dictionary<Stat, float[]>>();
 
-                    return progressionStat.levels[level -1];
+            foreach (ProgressionCharacterClass progressionClass in characterClasses) { 
+                // begin building out the nested dictionary
+                var statLookupTable = new Dictionary<Stat, float[]>();
+
+                // populate the nested dictionary 
+                foreach (ProgressionStat progressionStat in progressionClass.stats) {
+                    statLookupTable[progressionStat.stat] = progressionStat.levels;
                 }
+
+                // add the nestet dictonary to the parent dictonary
+                lookupTable[progressionClass.characterClass] = statLookupTable;
             }
-            return 0;
         }
 
         [System.Serializable]
