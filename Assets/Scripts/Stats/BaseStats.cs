@@ -12,9 +12,15 @@ namespace RPG.Stats {
 
         private void Start() {
             currentLevel = CalculateLevel();
+            Experience experience = GetComponent<Experience>();
+            if (experience != null) {
+                // adds UpdateLevel() to the list to be called when 
+                // onExperiencedGained is called in Experience.cs
+                experience.onExperienceGained += UpdateLevel;
+            }
         }
 
-        private void Update() {
+        private void UpdateLevel() {
             int newLevel = CalculateLevel();
             if (newLevel > currentLevel) {
                 currentLevel = newLevel;
@@ -26,6 +32,10 @@ namespace RPG.Stats {
         }
 
         public int GetLevel() {
+            // ensure currentLevel is always set
+            if (currentLevel < 1) {
+                currentLevel = CalculateLevel();
+            }
             return currentLevel;
         }
 

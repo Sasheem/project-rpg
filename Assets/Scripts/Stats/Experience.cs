@@ -7,8 +7,14 @@ namespace RPG.Stats {
     public class Experience : MonoBehaviour, IJsonSaveable {
         [SerializeField] float experiencePoints = 0;
 
+        // functions that return void and take no arguements
+        public event Action onExperienceGained;
+
+        // Gain the appropriate experience and alert subscribers 
+        // of the event onExperienceGained
         public void GainExperience(float experience) {
             experiencePoints += experience;
+            onExperienceGained();
         }
 
         public float GetPoints()
