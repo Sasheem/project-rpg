@@ -8,9 +8,16 @@ namespace RPG.Stats {
         [SerializeField] CharacterClass characterClass;
         [SerializeField] Progression progression = null;
 
+        int currentLevel = 0;
+
+        private void Start() {
+            currentLevel = CalculateLevel();
+        }
+
         private void Update() {
-            if (gameObject.tag == "Player") {
-                print(GetLevel());
+            int newLevel = CalculateLevel();
+            if (newLevel > currentLevel) {
+                currentLevel = newLevel;
             }
         }
 
@@ -18,8 +25,12 @@ namespace RPG.Stats {
             return progression.GetStat(stat, characterClass, GetLevel());
         }
 
-        // return level for character this script is attached to
         public int GetLevel() {
+            return currentLevel;
+        }
+
+        // return level for character this script is attached to
+        public int CalculateLevel() {
             Experience experience = GetComponent<Experience>();
             // enemies with no experience need a level too
             if (experience == null) return startingLlevel;
