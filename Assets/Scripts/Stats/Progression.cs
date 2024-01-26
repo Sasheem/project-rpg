@@ -17,6 +17,13 @@ namespace RPG.Stats {
             return levels[level - 1];
         }
 
+        public int GetLevels(Stat stat, CharacterClass characterClass) {
+            BuildLookup();
+            float[] levels = lookupTable[characterClass][stat];
+            
+            return levels.Length;
+        }
+
         // build the progression table as a Dictionary
         private void BuildLookup()
         {

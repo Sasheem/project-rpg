@@ -2,12 +2,12 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace RPG.Attributes {
+namespace RPG.Stats {
     public class ExperienceDisplay : MonoBehaviour {
         Experience experience;
 
         private void Awake() {
-            // cache health
+            // cache experience points
             experience = GameObject.FindWithTag("Player").GetComponent<Experience>();
         }
 
