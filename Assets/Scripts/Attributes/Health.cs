@@ -7,10 +7,15 @@ using UnityEngine;
 
 namespace RPG.Attributes {
     public class Health : MonoBehaviour, IJsonSaveable {
+
+        [SerializeField] float regenerationPercentage = 70f;
         float healthPoints = -1f;
         bool isDead = false;
 
         public void Start() {
+            // subscribe RegenerateHealth to onLevelUp event
+            GetComponent<BaseStats>().onLevelUp += RegenerateHealth;
+
             // doing this here causes an issue here, will fix later
             if (healthPoints < 0) {
                 healthPoints = GetComponent<BaseStats>().GetStat(Stat.Health);
@@ -49,6 +54,12 @@ namespace RPG.Attributes {
             Experience experience = instigator.GetComponent<Experience>();
             if (experience == null) return; 
             experience.GainExperience(GetComponent<BaseStats>().GetStat(Stat.ExperienceReward));
+        }
+
+        private void RegenerateHealth()
+        {
+            float regenHealthPoints = GetComponent<BaseStats>().GetStat(Stat.Health) * (regenerationPercentage / 100);
+            healthPoints = Mathf.Max(healthPoints, regenHealthPoints);
         }
 
         public JToken CaptureAsJToken()
