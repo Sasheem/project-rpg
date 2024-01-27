@@ -1,4 +1,3 @@
-using System;
 using Newtonsoft.Json.Linq;
 using RPG.Core;
 using RPG.Saving;
@@ -18,7 +17,7 @@ namespace RPG.Attributes {
 
             // doing this here causes an issue here, will fix later
             if (healthPoints < 0) {
-                healthPoints = GetComponent<BaseStats>().GetStat(Stat.Health);
+                healthPoints = GetMaxHealthPoints();
             }
             
         }
@@ -26,6 +25,7 @@ namespace RPG.Attributes {
         public bool IsDead() { return isDead; }
 
         public void TakeDamage(GameObject instigator, float damage) {
+            print(gameObject.name + " took damage: " + damage);
             healthPoints = Mathf.Max(healthPoints - damage, 0);
             if(healthPoints == 0)
             {
@@ -34,8 +34,16 @@ namespace RPG.Attributes {
             }
         }
 
+        public float GetHealthPoints() {
+            return healthPoints;
+        }
+
+        public float GetMaxHealthPoints() {
+            return GetComponent<BaseStats>().GetStat(Stat.Health);
+        }
+
         public float GetPercentage() {
-            return 100 * (healthPoints/ GetComponent<BaseStats>().GetStat(Stat.Health));
+            return 100 * (healthPoints / GetMaxHealthPoints());
         }
 
         private void Die()
@@ -58,7 +66,7 @@ namespace RPG.Attributes {
 
         private void RegenerateHealth()
         {
-            float regenHealthPoints = GetComponent<BaseStats>().GetStat(Stat.Health) * (regenerationPercentage / 100);
+            float regenHealthPoints = GetMaxHealthPoints() * (regenerationPercentage / 100);
             healthPoints = Mathf.Max(healthPoints, regenHealthPoints);
         }
 
@@ -73,7 +81,6 @@ namespace RPG.Attributes {
             if (healthPoints <= 0) {
                 Die();
             }
-            // UpdateState();
         }
 
     }
