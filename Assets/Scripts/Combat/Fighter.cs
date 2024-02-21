@@ -5,10 +5,11 @@ using UnityEngine;
 using Newtonsoft.Json.Linq;
 using RPG.Attributes;
 using RPG.Stats;
+using System.Collections.Generic;
 
 namespace RPG.Combat
 {
-    public class Fighter : MonoBehaviour, IAction, IJsonSaveable {
+    public class Fighter : MonoBehaviour, IAction, IJsonSaveable, IModifierProvider {
         
         [SerializeField] float timeBetweenAttacks = 1f;
         
@@ -86,6 +87,9 @@ namespace RPG.Combat
 
             float damage = GetComponent<BaseStats>().GetStat(Stat.Damage);
 
+            // Debug
+            Debug.Log($"Damage = {damage}");
+
             if (currentWeapon.HasProjectile()) {
                 currentWeapon.LaunchProjectile(rightHandTransform, leftHandTransform, target, gameObject, damage);
             } else {
@@ -128,6 +132,13 @@ namespace RPG.Combat
         {
             GetComponent<Animator>().ResetTrigger("attack");
             GetComponent<Animator>().SetTrigger("stopAttack");
+        }
+
+        public IEnumerable<float> GetAdditiveModifier(Stat stat)
+        {
+            if (stat == Stat.Damage) {
+                yield return currentWeapon.GetDamage();
+            }
         }
 
         public JToken CaptureAsJToken()
