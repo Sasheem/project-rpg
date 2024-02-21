@@ -16,7 +16,7 @@ namespace RPG.Stats {
             if (levels.Length < level) return 0;
             
             // Debug
-            Debug.Log($"{characterClass}/{stat}/{level} = {levels[level-1]}");
+            // Debug.Log($"{characterClass}/{stat}/{level} = {levels[level-1]}");
             return levels[level - 1];
         }
 
