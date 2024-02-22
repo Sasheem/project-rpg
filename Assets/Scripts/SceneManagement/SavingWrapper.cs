@@ -15,10 +15,10 @@ namespace RPG.SceneManagement {
 		}
 
 		public IEnumerator LoadLastScene() {
+			yield return GetComponent<JsonSavingSystem>().LoadLastScene(defaultSaveFile);
 			Fader fader = FindObjectOfType<Fader>();
 			// Fade out completely
 			fader.FadeOutImmediate();
-			yield return GetComponent<JsonSavingSystem>().LoadLastScene(defaultSaveFile);
 			// fade in
 			yield return fader.FadeIn(fadeInTime);
 		}

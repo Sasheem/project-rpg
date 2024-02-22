@@ -14,14 +14,30 @@ namespace RPG.Stats {
         public event Action onLevelUp;
 
         int currentLevel = 0;
+        Experience experience;
+
+        private void Awake () {
+            experience = GetComponent<Experience>();
+        }
 
         private void Start() {
+            // possible race condition in future
             currentLevel = CalculateLevel();
-            Experience experience = GetComponent<Experience>();
+        }
+
+        private void OnEnable() {
             if (experience != null) {
                 // adds UpdateLevel() to the list to be called when 
                 // onExperiencedGained is called in Experience.cs
                 experience.onExperienceGained += UpdateLevel;
+            }
+        }
+
+        private void OnDisable() {
+            if (experience != null) {
+                // adds UpdateLevel() to the list to be called when 
+                // onExperiencedGained is called in Experience.cs
+                experience.onExperienceGained -= UpdateLevel;
             }
         }
 

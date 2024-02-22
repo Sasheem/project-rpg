@@ -12,14 +12,20 @@ namespace RPG.Attributes {
         bool isDead = false;
 
         public void Start() {
-            // subscribe RegenerateHealth to onLevelUp event
-            GetComponent<BaseStats>().onLevelUp += RegenerateHealth;
-
             // doing this here causes an issue here, will fix later
             if (healthPoints < 0) {
                 healthPoints = GetMaxHealthPoints();
             }
-            
+        }
+
+        private void OnEnable() {
+            // subscribe RegenerateHealth to onLevelUp event
+            GetComponent<BaseStats>().onLevelUp += RegenerateHealth;
+        }
+
+        private void OnDisable() {
+            // subscribe RegenerateHealth to onLevelUp event
+            GetComponent<BaseStats>().onLevelUp -= RegenerateHealth;
         }
 
         public bool IsDead() { return isDead; }
