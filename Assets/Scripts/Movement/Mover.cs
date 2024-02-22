@@ -64,6 +64,7 @@ namespace RPG.Movement
 
         public void RestoreFromJToken(JToken state)
         {
+            // TODO change to use navMeshAgent.Move() in the future
             navMeshAgent.enabled = false;
             transform.position = state.ToVector3();
             navMeshAgent.enabled = true;
