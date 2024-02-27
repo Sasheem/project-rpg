@@ -1,4 +1,5 @@
 using System;
+using GameDevTV.Utils;
 using RPG.Attributes;
 using RPG.Combat;
 using RPG.Core;
@@ -21,7 +22,7 @@ namespace RPG.Control {
         GameObject player;
 
         // state
-        Vector3 guardPosition;
+        LazyValue<Vector3> guardPosition;
         float timeSinceLastSawPlayer = Mathf.Infinity;
         float timeSinceArrivedAtWaypoint = Mathf.Infinity;
         int currentWaypointIndex = 0;
@@ -31,11 +32,17 @@ namespace RPG.Control {
             health = GetComponent<Health>();
             mover = GetComponent<Mover>();
             player = GameObject.FindWithTag("Player");
+
+            guardPosition = new LazyValue<Vector3>(GetGuardPosition);
+        }
+
+        private Vector3 GetGuardPosition() {
+            return transform.position;
         }
 
         private void Start() {
             // eventually move elsewhere to avoid future race condition
-            guardPosition = transform.position;
+            guardPosition.ForceInit();
         }
 
         // Attack player if within range, stop attacking if not
@@ -71,7 +78,7 @@ namespace RPG.Control {
         // will also cancel the fighting action
         private void PatrolBehavior()
         {
-            Vector3 nextPosition = guardPosition;
+            Vector3 nextPosition = guardPosition.value;
 
             if (patrolPath != null) {
                 if (AtWaypoint()) {
