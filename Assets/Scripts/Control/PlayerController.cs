@@ -3,6 +3,7 @@ using RPG.Attributes;
 using RPG.Combat;
 using RPG.Movement;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace RPG.Control {
     public class PlayerController : MonoBehaviour {
@@ -11,7 +12,8 @@ namespace RPG.Control {
         enum CursorType {
             None,
             Movement,
-            Combat
+            Combat,
+            UI
         }
 
         [System.Serializable]
@@ -28,11 +30,29 @@ namespace RPG.Control {
         }
         private void Update()
         {
+            if (InteractWithUI()) return;
+
             // check if player is dead
-            if (health.IsDead()) return;
+            if (health.IsDead()) {
+                // could change to skull n cross bones but none for now
+                SetCursor(CursorType.None);
+                return;
+            }
             if (InteractWithCombat()) return;
             if (InteractWithMovement()) return;
+
+            // this point means no interactions were found
             SetCursor(CursorType.None);
+        }
+
+        private bool InteractWithUI()
+        {
+            // only applies to UI
+            if (EventSystem.current.IsPointerOverGameObject()) {
+                SetCursor(CursorType.UI);
+                return true;
+            }
+            return false;
         }
 
         private bool InteractWithCombat()
