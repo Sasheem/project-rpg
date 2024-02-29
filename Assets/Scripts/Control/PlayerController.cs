@@ -20,6 +20,7 @@ namespace RPG.Control {
 
         [SerializeField] CursorMapping[] cursorMappings = null;
         [SerializeField] float maxNavMeshProjectionDistance = 1f;
+        [SerializeField] float  maxNavPathLength = 10f;
 
         private void Awake() {
             health = GetComponent<Health>();
@@ -96,16 +97,17 @@ namespace RPG.Control {
             return false;
         }
 
+        // raycast to the navmesh
         private bool RaycastNavMesh(out Vector3 target) {
-            // target needs to be set cause of out keyword
+            // target needs to be set to satisfy the 'out' requirement
             target = new Vector3();
 
-            // Raycast to terrain
+            // Raycast to terrain, return false if unable to
             RaycastHit hit;
             bool hasHit = Physics.Raycast(GetMouseRay(), out hit);
             if (!hasHit) return false;
-            
-            // Find nearest navmesh point
+
+            // Find nearest navmesh point, return false if unable to
             NavMeshHit navMeshHit;
             bool hasCastToNavMesh = NavMesh.SamplePosition(
                 hit.point, 
@@ -113,10 +115,32 @@ namespace RPG.Control {
                 maxNavMeshProjectionDistance, 
                 NavMesh.AllAreas);
             if (!hasCastToNavMesh) return false;
-
-            // return true if found
+        
             target = navMeshHit.position;
+
+            // figure out if we want to use this path based on the target    
+            NavMeshPath path = new NavMeshPath();
+            bool hasPath = NavMesh.CalculatePath(transform.position, target, NavMesh.AllAreas, path);
+
+            // return false if path not found, incomplete or too long
+            if (!hasPath) return false;
+            if (path.status != NavMeshPathStatus.PathComplete) return false;
+            if (GetPathLength(path) > maxNavPathLength) return false;
+
+            // path is good, return true
             return true;
+        }
+
+        private float GetPathLength(NavMeshPath path)
+        {
+            float total = 0;
+            if (path.corners.Length < 2) return total;
+            for (int i = 0; i < path.corners.Length - 1; i++)
+            {
+                total += Vector3.Distance(path.corners[i], path.corners[i+1]);
+            }
+            // debug print total here
+            return total;
         }
 
         private void SetCursor(CursorType type)
