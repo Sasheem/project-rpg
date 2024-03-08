@@ -154,6 +154,14 @@ PrefabInstance:
       propertyPath: rightHandTransform
       value: 
       objectReference: {fileID: 2805293479514256084}
+    - target: {fileID: 4218893479601606520, guid: d7642e0636a2de8449d5a34a27f2680f, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4218893479601606520, guid: d7642e0636a2de8449d5a34a27f2680f, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8212160064377723453, guid: d7642e0636a2de8449d5a34a27f2680f, type: 3}
       propertyPath: m_Name
       value: Player
