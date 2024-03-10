@@ -185,6 +185,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1143426500078843441, guid: d7642e0636a2de8449d5a34a27f2680f, type: 3}
   m_PrefabInstance: {fileID: 2814161812991995270}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6087745898075613527 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8318691539944998097, guid: d7642e0636a2de8449d5a34a27f2680f, type: 3}
+  m_PrefabInstance: {fileID: 2814161812991995270}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6267494814740740027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0bf302e4c6836f4f8cb3b79f3e1a3d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6267494814740740027 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8212160064377723453, guid: d7642e0636a2de8449d5a34a27f2680f, type: 3}
@@ -285,6 +296,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6129002317509982884, guid: 7d39970b476ada54fa7a5523c3995ca8, type: 3}
+      propertyPath: healthComponent
+      value: 
+      objectReference: {fileID: 6087745898075613527}
     - target: {fileID: 9105436304472633733, guid: 7d39970b476ada54fa7a5523c3995ca8, type: 3}
       propertyPath: m_Name
       value: Health Bar
