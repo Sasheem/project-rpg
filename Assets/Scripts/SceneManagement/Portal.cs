@@ -1,4 +1,5 @@
 using System.Collections;
+using RPG.Control;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
@@ -34,6 +35,10 @@ namespace RPG.SceneManagement {
             
             Fader fader = FindObjectOfType<Fader>();
             SavingWrapper savingWrapper = FindObjectOfType<SavingWrapper>();
+            PlayerController playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+            
+            // remove movement control from player
+            playerController.enabled = false;
 
             // begin fading out over time
             yield return fader.FadeOut(fadeOutTime);
@@ -41,6 +46,9 @@ namespace RPG.SceneManagement {
             // save current level
             savingWrapper.Save();
             yield return SceneManager.LoadSceneAsync(sceneToLoad);
+            // REMOVE CONTROL
+            PlayerController newPlayerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+            newPlayerController.enabled = false;
 
             // load current level
             savingWrapper.Load();
@@ -51,10 +59,12 @@ namespace RPG.SceneManagement {
 
             // waiting for some time so camera can stabilize
             yield return new WaitForSeconds(fadeWaitTime);
-            yield return fader.FadeIn(fadeInTime);
+            fader.FadeIn(fadeInTime);
 
             UpdatePlayer(otherPortal);
 
+            // RESTORE CONTROL
+            newPlayerController.enabled = true;
             // destroy this portal
             Destroy(gameObject);
         }
