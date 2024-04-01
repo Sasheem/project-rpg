@@ -11,6 +11,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fireball Pickup
       objectReference: {fileID: 0}
+    - target: {fileID: 1106265564817044927, guid: 0500bf7eed2634b4db193053cbe328fe, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d30dbab531a684147ae2fdedb754db58, type: 2}
+    - target: {fileID: 1106265564817684313, guid: 0500bf7eed2634b4db193053cbe328fe, type: 3}
+      propertyPath: ShapeModule.type
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1106265564817684313, guid: 0500bf7eed2634b4db193053cbe328fe, type: 3}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1106265564817684313, guid: 0500bf7eed2634b4db193053cbe328fe, type: 3}
+      propertyPath: InitialModule.maxNumParticles
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 1106265564817684313, guid: 0500bf7eed2634b4db193053cbe328fe, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1106265564817684313, guid: 0500bf7eed2634b4db193053cbe328fe, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key0.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1106265564832976029, guid: 0500bf7eed2634b4db193053cbe328fe, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3464439065350727038, guid: 0500bf7eed2634b4db193053cbe328fe, type: 3}
       propertyPath: m_RootOrder
       value: 0
