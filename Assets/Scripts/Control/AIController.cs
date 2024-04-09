@@ -9,7 +9,8 @@ using UnityEngine;
 namespace RPG.Control {
     public class AIController : MonoBehaviour {
         [SerializeField] float chaseDistance = 5f;
-        [SerializeField] float suspicionTime = 5f;
+        [SerializeField] float suspicionTime = 3f;
+        [SerializeField] float aggroCooldownTime = 5f;
         [SerializeField] PatrolPath patrolPath;
         [SerializeField] float waypointTolerance = 1f;
         [SerializeField] float waypointDwellTime = 3f;
@@ -25,6 +26,7 @@ namespace RPG.Control {
         LazyValue<Vector3> guardPosition;
         float timeSinceLastSawPlayer = Mathf.Infinity;
         float timeSinceArrivedAtWaypoint = Mathf.Infinity;
+        float timeSinceAggrevated = Mathf.Infinity;
         int currentWaypointIndex = 0;
 
         private void Awake() {
@@ -51,7 +53,7 @@ namespace RPG.Control {
             // cheeck if player is dead
             if (health.IsDead()) return;
 
-            if (InAttackRangeOfPlayer() && fighter.CanAttack(player))
+            if (IsAggrevated() && fighter.CanAttack(player))
             {
                 AttackBehavior();
             }
@@ -66,12 +68,18 @@ namespace RPG.Control {
 
             UpdateTimers();
         }
+
+        // trigger attack behavior via unity event when taking damage
+        public void Aggrevate() {
+            timeSinceAggrevated = 0;
+        }
         
         // incrememnt by amount the frame took on every frame
         private void UpdateTimers()
         {
             timeSinceLastSawPlayer += Time.deltaTime;
             timeSinceArrivedAtWaypoint += Time.deltaTime;
+            timeSinceAggrevated += Time.deltaTime;
         }
 
         // begin patrol from guard location
@@ -122,9 +130,11 @@ namespace RPG.Control {
         }
 
         // calculate the distance to the player
-        private bool InAttackRangeOfPlayer() {
+        private bool IsAggrevated() {
             float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
-            return distanceToPlayer < chaseDistance;
+            // check aggrevated here
+
+            return distanceToPlayer < chaseDistance || timeSinceAggrevated < aggroCooldownTime;
         }
 
         // called by unity
