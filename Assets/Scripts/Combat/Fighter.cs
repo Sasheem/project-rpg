@@ -7,6 +7,7 @@ using Newtonsoft.Json.Linq;
 using RPG.Attributes;
 using RPG.Stats;
 using System.Collections.Generic;
+using GameDevTV.Inventories;
 
 namespace RPG.Combat
 {
@@ -21,6 +22,7 @@ namespace RPG.Combat
         
 
         Health target;
+        Equipment equipment;
         float timeSinceLastAttack = Mathf.Infinity;
         WeaponConfig currentWeaponConfig;
         LazyValue<Weapon> currentWeapon;
@@ -28,6 +30,10 @@ namespace RPG.Combat
         private void Awake() {
             currentWeaponConfig = defaultWeapon;
             currentWeapon = new LazyValue<Weapon>(SetupDefaultWeapon);
+            equipment = GetComponent<Equipment>();
+            if (equipment) {
+                equipment.equipmentUpdated += UpdateWeapon;
+            }
         }
 
         private Weapon SetupDefaultWeapon() {
@@ -62,6 +68,18 @@ namespace RPG.Combat
         {
             currentWeaponConfig = weapon;
             currentWeapon.value = AttachWeapon(weapon);
+        }
+
+        private void UpdateWeapon() {
+            // get the weapon from equipment and cast to WeaponConfig
+            var weapon = equipment.GetItemInSlot(EquipLocation.Weapon) as WeaponConfig;
+            Debug.Log("Weapon: " + weapon);
+            // equip the weapon and equip defaultWeapon if none in the EquipmentSlot
+            if (weapon == null) {
+                EquipWeapon(defaultWeapon);
+            } else {
+                EquipWeapon(weapon);
+            }
         }
 
         private Weapon AttachWeapon(WeaponConfig weapon)
