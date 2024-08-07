@@ -1,5 +1,5 @@
 using System.Collections;
-using RPG.Saving;
+using GaemDevTV.Saving;
 using UnityEngine;
 
 namespace RPG.SceneManagement {
@@ -39,7 +39,7 @@ namespace RPG.SceneManagement {
 		}
 		
 		public void Load() {
-			GetComponent<JsonSavingSystem>().Load(defaultSaveFile);
+			StartCoroutine(GetComponent<JsonSavingSystem>().LoadLastScene(defaultSaveFile));
 		}
 
 		public void Delete() {
