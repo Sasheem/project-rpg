@@ -1,6 +1,8 @@
 using RPG.Attributes;
 using UnityEngine;
 using GameDevTV.Inventories;
+using RPG.Stats;
+using System.Collections.Generic;
 
 namespace RPG.Combat {
     [CreateAssetMenu(fileName = "Weapon", menuName = "Weapons/Make New Weapon", order = 0)]
@@ -82,7 +84,7 @@ namespace RPG.Combat {
         }
 
         public IEnumerable<float> GetAdditiveModifiers(Stat stat) {
-            if (stat == stat.Damage) {
+            if (stat == Stat.Damage) {
                 yield return weaponDamage;
             }
         }
