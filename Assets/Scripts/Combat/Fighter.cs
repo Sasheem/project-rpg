@@ -1,17 +1,19 @@
-using GameDevTV.Utils;
+using UnityEngine;
 using RPG.Movement;
 using RPG.Core;
-using GaemDevTV.Saving;
-using UnityEngine;
-using Newtonsoft.Json.Linq;
+// using GameDevTV.Saving;
 using RPG.Attributes;
 using RPG.Stats;
 using System.Collections.Generic;
+using GameDevTV.Utils;
 using GameDevTV.Inventories;
+// new saving method - removed because this is done in equipment
+// using RPG.Saving;
+// using Newtonsoft.Json.Linq;
 
 namespace RPG.Combat
 {
-    public class Fighter : MonoBehaviour, IAction, IJsonSaveable {
+    public class Fighter : MonoBehaviour, IAction/*, IJsonSaveable*/ {
         
         [SerializeField] float timeBetweenAttacks = 1f;
         
@@ -171,16 +173,16 @@ namespace RPG.Combat
             GetComponent<Animator>().SetTrigger("stopAttack");
         }
 
-        public JToken CaptureAsJToken()
-        {
-            return JToken.FromObject(currentWeaponConfig.name);
-        }
+        // public JToken CaptureAsJToken()
+        // {
+        //     return JToken.FromObject(currentWeaponConfig.name);
+        // }
 
-        public void RestoreFromJToken(JToken state)
-        {
-            string weaponName = state.ToObject<string>();
-            WeaponConfig weapon = UnityEngine.Resources.Load<WeaponConfig>(weaponName);
-            EquipWeapon(weapon);
-        }
+        // public void RestoreFromJToken(JToken state)
+        // {
+        //     string weaponName = state.ToObject<string>();
+        //     WeaponConfig weapon = UnityEngine.Resources.Load<WeaponConfig>(weaponName);
+        //     EquipWeapon(weapon);
+        // }
     }
 }

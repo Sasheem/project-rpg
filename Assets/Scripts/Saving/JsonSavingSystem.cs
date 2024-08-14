@@ -6,7 +6,7 @@ using Newtonsoft.Json.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace GaemDevTV.Saving
+namespace GameDevTV.Saving
 {
     public class JsonSavingSystem : MonoBehaviour
     {

@@ -1,7 +1,7 @@
 using GameDevTV.Utils;
 using Newtonsoft.Json.Linq;
 using RPG.Core;
-using GaemDevTV.Saving;
+using GameDevTV.Saving;
 using RPG.Stats;
 using UnityEngine;
 using UnityEngine.Events;

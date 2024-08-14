@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 
-namespace GaemDevTV.Saving
+namespace GameDevTV.Saving
 {
     public interface IJsonSaveable
     {

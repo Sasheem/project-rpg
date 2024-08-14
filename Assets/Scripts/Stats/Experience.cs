@@ -1,7 +1,7 @@
+using UnityEngine;
+using GameDevTV.Saving;
 using System;
 using Newtonsoft.Json.Linq;
-using GaemDevTV.Saving;
-using UnityEngine;
 
 namespace RPG.Stats {
     public class Experience : MonoBehaviour, IJsonSaveable {
