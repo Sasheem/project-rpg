@@ -343,6 +343,18 @@ MonoBehaviour:
     hotspot: {x: 0, y: 0}
   maxNavMeshProjectionDistance: 1
   raycastRadius: 1
+--- !u!114 &6070966869043770858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3207583326336708102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cf13c8de9adc7e46878284ef1f10ed3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6161243299855605094
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -356,7 +368,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   experiencePoints: 0
---- !u!114 &6070966869043770858
+--- !u!114 &8302764417156989864
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -365,9 +377,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3207583326336708102}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2cf13c8de9adc7e46878284ef1f10ed3, type: 3}
+  m_Script: {fileID: 11500000, guid: dcfcfee9aa1c40d4c8990b3171232259, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scatterDistance: 2
 --- !u!4 &5956732113676288522 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1143426500078843441, guid: d7642e0636a2de8449d5a34a27f2680f, type: 3}
