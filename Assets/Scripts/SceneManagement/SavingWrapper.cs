@@ -39,7 +39,8 @@ namespace RPG.SceneManagement {
 		}
 		
 		public void Load() {
-			StartCoroutine(GetComponent<JsonSavingSystem>().LoadLastScene(defaultSaveFile));
+			GetComponent<JsonSavingSystem>().Load(defaultSaveFile);
+			// StartCoroutine(GetComponent<JsonSavingSystem>().LoadLastScene(defaultSaveFile));
 		}
 
 		public void Delete() {
