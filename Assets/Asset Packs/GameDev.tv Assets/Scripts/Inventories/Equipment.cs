@@ -2,6 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using GameDevTV.Saving;
+using GameDevTV.Utils;
+using Newtonsoft.Json.Linq;
+
+
+
+
 
 namespace GameDevTV.Inventories
 {
@@ -11,7 +17,7 @@ namespace GameDevTV.Inventories
     /// 
     /// This component should be placed on the GameObject tagged "Player".
     /// </summary>
-    public class Equipment : MonoBehaviour, ISaveable
+    public class Equipment : MonoBehaviour, ISaveable, IJsonSaveable
     {
         // STATE
         Dictionary<EquipLocation, EquipableItem> equippedItems = new Dictionary<EquipLocation, EquipableItem>();
@@ -96,6 +102,29 @@ namespace GameDevTV.Inventories
                 if (item != null)
                 {
                     equippedItems[pair.Key] = item;
+                }
+            }
+        }
+
+        public JToken CaptureAsJToken() {
+            JObject state = new JObject();
+            IDictionary<string, JToken> stateDict = state;
+            foreach (var pair in equippedItems) {
+                stateDict[pair.Key.ToString()] = JToken.FromObject(pair.Value.GetItemID());
+            }
+            return state;
+        }
+
+        public void RestoreFromJToken(JToken state) {
+            if (state is JObject stateObject) {
+                equippedItems.Clear();
+                IDictionary<string, JToken> stateDict = stateObject;
+                foreach (var pair in stateObject) {
+                    if (Enum.TryParse(pair.Key, true, out EquipLocation key)) {
+                        if (InventoryItem.GetFromID(pair.Value.ToObject<string>()) is EquipableItem item) {
+                            equippedItems[key] = item;
+                        }
+                    }
                 }
             }
         }
